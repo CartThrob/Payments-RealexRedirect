@@ -165,7 +165,7 @@ class Cartthrob_realex_redirect extends Cartthrob_payment_gateway
 			$auth['failed']			= TRUE; 
 			$auth['error_message']	= $this->lang('realex_redirect_hashes_dont_match'); 
 			
-			$template = $this->plugin_settings('failure_template'); 
+			
 		}
 		elseif ($post['RESULT'] == "00")
 		{
@@ -175,7 +175,7 @@ class Cartthrob_realex_redirect extends Cartthrob_payment_gateway
 			$auth['failed']			= FALSE; 
 			$auth['error_message']	= '';
 
-			$template = $this->plugin_settings('success_template'); 
+			
 		}
 		else
 		{
@@ -185,20 +185,20 @@ class Cartthrob_realex_redirect extends Cartthrob_payment_gateway
 			$auth['failed']			= FALSE; 
 			$auth['error_message']	= $post['MESSAGE'];
 
-			$template = $this->plugin_settings('failure_template'); 
+			
 		}
 		
  		
-		if ($this->order('return'))
-		{
-			$template = $this->order('return'); 
-		}
-		
-		$this->gateway_order_update($auth, $this->order('entry_id'), $return_url = NULL );
-		echo $this->parse_template($this->fetch_template( $template )); 
-		exit; 
+		if ( ! $this->order('return'))
+        {
+            $this->update_order(array('return' => $this->plugin_settings('order_complete_template')));
+        }
 
-	} // END
+        $this->checkout_complete_offsite($auth, $order_id, 'template');
+
+        exit;
+
+    } // END
 	
 	function arr($array, $key)
 	{
