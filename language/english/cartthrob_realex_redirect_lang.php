@@ -1,7 +1,7 @@
 <?php   
 
 $lang = array(
-		'realex_redirect_title' => 'Pay by Credit/debit card (via Realex)',
+		'realex_redirect_title' => 'Realex Redirect Payment Gateway',
 
 		'realex_redirect_overview' => '<p>This gateway makes use of a file called extload.php which is contained in the CartThrob themes folder. You will need to edit this file if your EE system folder is not named "system" or has been moved to a different directory than the default</p>
 		
