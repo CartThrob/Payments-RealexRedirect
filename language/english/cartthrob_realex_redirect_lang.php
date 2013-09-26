@@ -1,7 +1,7 @@
 <?php   
 
 $lang = array(
-		'realex_redirect_title' => 'Realex Redirect Payment Gateway',
+		'realex_redirect_title' => 'Pay by Credit/debit card (via Realex)',
 
 		'realex_redirect_overview' => '<p>This gateway makes use of a file called extload.php which is contained in the CartThrob themes folder. You will need to edit this file if your EE system folder is not named "system" or has been moved to a different directory than the default</p>
 		
@@ -103,8 +103,11 @@ $lang = array(
 
 		'realex_redirect_settings_merchant_id' => 'Your Merchant Id',
 		'realex_redirect_settings_your_secret' => 'Your Secret',
+		'realex_sub_account' => 'Sub-account name (optional)',
+		'realex_sub_account_name_note' => 'If your Realex account is configured to use sub-accounts then you can specify which to use here. If blank then the default \'internet\' account will be used',
 		'realex_redirect_success_template' => 'Backup Return Template',
 		'realex_backup_template_note'	=> 'If return parameter is not set in the checkout_form, this template will be used as a backup repsonse template. ',
+		'realex_redirect_failure_template' => 'Backup failure template',
 		'realex_redirect_hashes_dont_match' => "Hash values do not match. Response by merchant failed.",
 	);
 

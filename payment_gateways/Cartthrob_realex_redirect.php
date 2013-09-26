@@ -14,6 +14,12 @@ class Cartthrob_realex_redirect extends Cartthrob_payment_gateway
 			'short_name' => 'your_secret',
 			'type' => 'text'
 		),
+		array(
+			'name' => 'realex_sub_account',
+			'short_name' => 'your_sub_account',
+			'note' => 'realex_sub_account_name_note',
+			'type' => 'text'
+		),
 	 	array(
 			'name'=>'realex_redirect_success_template',
 			'short_name'=>'success_template',
@@ -99,7 +105,12 @@ class Cartthrob_realex_redirect extends Cartthrob_payment_gateway
 			'CUST_NUM'				=> $this->order('member_id'),
 			'ct_order_id'			=> $this->order('order_id'),
 		);
+
+		if($this->plugin_settings('your_sub_account')){
+			$post_array['ACCOUNT'] = $this->plugin_settings('your_sub_account');
+		}
 		
+
 		$this->gateway_exit_offsite($post_array, 'https://epage.payandshop.com/epage.cgi'); 
 		exit;
 	}
