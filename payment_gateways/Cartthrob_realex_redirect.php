@@ -82,11 +82,11 @@ class Cartthrob_realex_redirect extends Cartthrob_payment_gateway
 		$currency_code = $this->order('currency_code') ? $this->order('currency_code') :"GBP" ; 
 		
 		$tmp = $timestamp.".". $this->plugin_settings('your_merchant_id').".".$this->order('order_id').".".$rounded_total.".".$currency_code;
-		$md5hash = md5($tmp);
+		$sha1hash = sha1($tmp);
 		
-		$tmp = $md5hash.".".$this->plugin_settings('your_secret');
+		$tmp = $sha1hash.".".$this->plugin_settings('your_secret');
 		
-		$md5hash = md5($tmp);
+		$sha1hash = sha1($tmp);
 		
 		$post_array = array(
 			'MERCHANT_ID'			=> $this->plugin_settings('your_merchant_id'),
@@ -94,7 +94,7 @@ class Cartthrob_realex_redirect extends Cartthrob_payment_gateway
 			'CURRENCY'				=> $currency_code,
 			'AMOUNT'				=> $rounded_total,
 			'TIMESTAMP'				=> $timestamp,	
-			'MD5HASH'				=> $md5hash,	
+			'SHA1HASH'				=> $sha1hash,	
 			'AUTO_SETTLE_FLAG'		=> 1,
 			'CUST_NUM'				=> $this->order('member_id'),
 			'ct_order_id'			=> $this->order('order_id'),
@@ -153,11 +153,11 @@ class Cartthrob_realex_redirect extends Cartthrob_payment_gateway
 				.$post['PASREF']."."
 				.$post['AUTHCODE'];
 
-		$md5hash = md5($tmp);
-		$tmp = $md5hash.".". $this->plugin_settings('your_secret');
-		$md5hash = md5($tmp);
+		$sha1hash = sha1($tmp);
+		$tmp = $sha1hash.".". $this->plugin_settings('your_secret');
+		$sha1hash = sha1($tmp);
 		
-		if ($md5hash != $post['MD5HASH']) 
+		if ($sha1hash != $post['SHA1HASH']) 
 		{
 			$auth['authorized']	 	= FALSE; 
 			$auth['declined'] 		= FALSE; 
