@@ -153,11 +153,11 @@ class Cartthrob_realex_redirect extends Cartthrob_payment_gateway
 				.$post['PASREF']."."
 				.$post['AUTHCODE'];
 
-		$md5hash = md5($tmp);
+		$md5hash = sha1($tmp);
 		$tmp = $md5hash.".". $this->plugin_settings('your_secret');
-		$md5hash = md5($tmp);
+		$md5hash = sha1($tmp);
 		
-		if ($md5hash != $post['MD5HASH']) 
+		if ($md5hash != $post['SHA1HASH']) 
 		{
 			$auth['authorized']	 	= FALSE; 
 			$auth['declined'] 		= FALSE; 
